@@ -82,7 +82,7 @@ document.getElementById('btnEqual').addEventListener('click', function () {
     }
 
 })
-let exper= 1;
+
 function text(answerNumber) {
     let oneNine = {
         1: "один",
@@ -129,4 +129,3 @@ function text(answerNumber) {
         9: "девятьсот"
     }
 }
-alert(text(exper));
