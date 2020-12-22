@@ -20,7 +20,7 @@ document.querySelector('#btnRetry').addEventListener('click', function () {
     minValue = 0;
     maxValue = 100;
     answerNumber = ((MINstart + MAXstart) / 2);
-    answerField.innerText = `Вы загадали число ${Math.floor(Math.random() * MAXstart)}?`;
+    answerField.innerText = `Вы загадали число ${text(Math.floor(Math.random() * MAXstart))}?`;
     order = 1;
     orderField.innerText = order;
     MIN = MINstart;
@@ -65,7 +65,7 @@ document.getElementById('btnLess').addEventListener('click', function () {
             answerNumber = Math.round((MIN + MAX) / 2);
             order++;
             orderField.innerText = order;
-            answerField.innerText = `Вы загадали число ${answerNumber}?`;
+            answerField.innerText = `Вы загадали число ${text(answerNumber)}?`;
         }
     }
 })
@@ -80,10 +80,9 @@ document.getElementById('btnEqual').addEventListener('click', function () {
         answerField.innerText = answerPhras;
         gameRun = false;
     }
-
 })
 
-function text(answerNumber) {
+function text(number) {
     let oneNine = {
         1: "один",
         2: "два",
@@ -128,4 +127,44 @@ function text(answerNumber) {
         8: "восемьсот",
         9: "девятьсот"
     }
+    let text = "";
+    let num = parseInt(number);
+    key = null;
+
+    if (num == 0) {
+        text = "0";
+        return text;
+    }
+
+    if (num < 0) {
+        text += "минус ";
+        num = Math.abs(num);
+    }
+
+    if (num >= 100) {
+        key = Math.floor(num / 100);
+        num = num - key * 100;
+        text += hundreds[key] + " ";
+    }
+
+    if (num >= 10 && num < 20) {
+        text += tenNineteen[num] + " ";
+    }
+    else if (num < 10 && num > 0) {
+        text += oneNine[num] + " ";
+    }
+    else if (num >= 20) {
+        key = Math.floor(num / 10);
+        num = num - key * 10;
+        text += dozens[key] + " ";
+
+        if (num > 0) {
+            text += oneNine[num];
+        }
+    }
+
+    text.trim;
+
+    return text.length < 20 ? text : number;
+
 }
